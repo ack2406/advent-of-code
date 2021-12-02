@@ -2,3 +2,5 @@
 /target/
 /project/project/target/config-classes/
 /project/target/
+/.bsp/
+/null/
