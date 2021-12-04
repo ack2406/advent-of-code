@@ -1,7 +1,7 @@
 package com.ackmp.adventofcode.year2021
 
 object Day02 {
-  def calculatePosition(input: List[List[String]]): Any = {
+  def calculatePosition(input: List[List[String]]): Int = {
     input.foldLeft(List(0, 0))({
       case (List(horizontalPos, depthPos), List(operator, parameter)) => operator match {
         case "forward" => List(horizontalPos + parameter.toInt, depthPos)
@@ -11,7 +11,7 @@ object Day02 {
     }).product
   }
 
-  def calculatePositionCorrectly(input: List[List[String]]): Any = {
+  def calculatePositionCorrectly(input: List[List[String]]): Int = {
     input.foldLeft(List(0, 0, 0))({
       case (List(horizontalPos, depthPos, aim), List(operator, parameter)) => operator match {
         case "forward" => List(horizontalPos + parameter.toInt, depthPos + (aim * parameter.toInt), aim)

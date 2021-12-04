@@ -16,12 +16,12 @@ object Day03 {
       .map(x => if (x == "1") "0" else "1")
       .mkString("")
 
-  def getPowerConsumption(input: List[List[String]]): Any = {
+  def getPowerConsumption(input: List[List[String]]): Int = {
     toDec(getGammaRate(input)) * toDec(getEpsilonRate(input))
   }
 
   // part 2
-  def getLifeSupportRating(input: List[List[String]]): Any = {
+  def getLifeSupportRating(input: List[List[String]]): Int = {
     def getRating(input: List[List[String]], n: Int, rateType: (List[List[String]]) => String,rates: List[String] = List()): String = input match {
       case x if x.length == 1 => x.head.mkString
       case _ => {
