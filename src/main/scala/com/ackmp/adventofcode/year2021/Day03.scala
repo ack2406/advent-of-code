@@ -1,5 +1,7 @@
 package com.ackmp.adventofcode.year2021
 
+import scala.annotation.tailrec
+
 object Day03 {
   // part 1
 
@@ -20,15 +22,18 @@ object Day03 {
     toDec(getGammaRate(input)) * toDec(getEpsilonRate(input))
   }
 
+  @tailrec
+  def getRating(input: List[List[String]], n: Int, rateType: (List[List[String]]) => String, rates: List[String] = List()): String = input match {
+    case x if x.length == 1 => x.head.mkString
+    case _ => {
+      val newRates = rateType(input).split("").toList
+      getRating(input.filter(x => x(x.length - n) == newRates(newRates.length - n)), n - 1, rateType, newRates)
+    }
+  }
+
   // part 2
   def getLifeSupportRating(input: List[List[String]]): Int = {
-    def getRating(input: List[List[String]], n: Int, rateType: (List[List[String]]) => String,rates: List[String] = List()): String = input match {
-      case x if x.length == 1 => x.head.mkString
-      case _ => {
-        val newRates = rateType(input).split("").toList
-        getRating(input.filter(x => x(x.length - n) == newRates(newRates.length - n)), n - 1, rateType, newRates)
-      }
-    }
+
     toDec(getRating(input, input.head.length, getGammaRate)) * toDec(getRating(input, input.head.length, getEpsilonRate))
   }
 
